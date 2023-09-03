@@ -5,12 +5,12 @@ import (
 	"github.com/kelseyhightower/envconfig"
 )
 
-type RunEnv int
+type RunEnv string
 
 const (
-	Development RunEnv = iota
-	Staging
-	Production
+	Development = RunEnv("Development")
+	Staging     = RunEnv("Staging")
+	Production  = RunEnv("Production")
 )
 
 func (m *RunEnv) Decode(value string) error {

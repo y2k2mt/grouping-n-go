@@ -6,7 +6,7 @@ import (
 
 var zapLogger *zap.Logger
 
-func InitLogger(config AppConfig) error {
+func InitAppLogger(config AppConfig) error {
 	zapLogger, err := zap.NewProduction()
 	if err != nil {
 		return err
@@ -15,6 +15,6 @@ func InitLogger(config AppConfig) error {
 	return nil
 }
 
-func GetZapLogger() *zap.Logger {
+func GetAppLogger() *zap.Logger {
 	return zapLogger
 }

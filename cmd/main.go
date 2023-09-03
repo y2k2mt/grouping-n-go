@@ -12,19 +12,18 @@ import (
 
 func main() {
 
-	log.Print("Starging up application...")
 	err := app.InitAppConfig()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 	config := app.GetAppConfig()
-	log.Printf("Initialized configuration: %v", config)
+	log.Printf("Start the application in %v mode", config.Env)
 
-	err = app.InitLogger(config)
+	err = app.InitAppLogger(config)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	appLogger := app.GetZapLogger()
+	appLogger := app.GetAppLogger()
 	defer appLogger.Sync()
 
 	err = infra.InitDatabase(config.DatabaseUrl, appLogger)
