@@ -16,7 +16,7 @@ type GroupHandler struct {
 }
 
 func (g *GroupHandler) GetGroup(c echo.Context) error {
-	group, err := model.GetGroup("id", g.GroupRepository)
+	group, err := model.GetGroup(model.GroupId{Id: c.Param("id")}, g.GroupRepository)
 	if err != nil {
 		if e.Is(err, errors.NoGroup) {
 			return c.NoContent(http.StatusNotFound)

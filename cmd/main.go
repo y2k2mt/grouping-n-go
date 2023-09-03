@@ -39,7 +39,7 @@ func main() {
 	group := handler.GroupHandler{GroupRepository: infra.GroupRepository{DB: infra.GetDatabase()}, Log: appLogger}
 
 	e.GET("/healthz", healthz.Healthz)
-	e.GET("/group", group.GetGroup)
+	e.GET("/group/:id", group.GetGroup)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
