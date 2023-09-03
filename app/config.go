@@ -15,6 +15,7 @@ const (
 
 func (m *RunEnv) Decode(value string) error {
 	switch {
+	//FIXME: duplicated value definition
 	case value == "Production":
 		*m = Production
 	case value == "Staging":
