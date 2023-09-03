@@ -24,6 +24,7 @@ func (g *GroupRepository) GetGroup(id string) (*Group, error) {
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, e.WithMessage(errors.NoGroup, id)
+			//FIXME: Not ErrNoRows?
 		} else if err.Error() == "no rows in result set" {
 			return nil, e.WithMessage(errors.NoGroup, id)
 		} else {

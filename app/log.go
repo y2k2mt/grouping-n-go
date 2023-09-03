@@ -1,17 +1,31 @@
 package app
 
 import (
+	"fmt"
 	"go.uber.org/zap"
 )
 
 var zapLogger *zap.Logger
 
 func InitAppLogger(config AppConfig) error {
-	zapLogger, err := zap.NewProduction()
+	var (
+		logger *zap.Logger
+		err    error
+	)
+	switch config.Env {
+	case Development:
+		logger, err = zap.NewDevelopment()
+	case Staging:
+		logger, err = zap.NewProduction()
+	case Production:
+		logger, err = zap.NewProduction()
+	default:
+		return fmt.Errorf("an unrecognized env %v", config.Env)
+	}
 	if err != nil {
 		return err
 	}
-	zapLogger = zapLogger
+	zapLogger = logger
 	return nil
 }
 
