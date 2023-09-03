@@ -13,10 +13,11 @@ import (
 func main() {
 
 	log.Print("Starging up application...")
-	config, err := app.InitConfig()
+	err := app.InitAppConfig()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+  config := app.GetAppConfig()
 	log.Printf("Initialized configuration: %v", config)
 
 	err = app.InitLogger(config)

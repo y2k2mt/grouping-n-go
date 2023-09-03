@@ -27,17 +27,21 @@ func (m *RunEnv) Decode(value string) error {
     return nil
 }
 
-type Config struct {
+type AppConfig struct {
 	Env         RunEnv `envconfig:"RUN_ENV" required:"true"`
 	DatabaseUrl string `envconfig:"DATABASE_URL" default:"host=localhost port=5432 user=postgres dbname=postgres sslmode=disable"`
 }
 
-func InitConfig() (Config, error) {
-	var c Config
+var c AppConfig
+
+func InitAppConfig() error {
 	err := envconfig.Process("app", &c)
 	if err != nil {
-		return Config{}, err
-	} else {
-		return c, nil
-	}
+    return err
+  }
+  return nil
+}
+
+func GetAppConfig() AppConfig {
+  return c
 }
