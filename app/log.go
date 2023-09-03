@@ -2,7 +2,6 @@ package app
 
 import (
 	"go.uber.org/zap"
-	"log"
 )
 
 var zapLogger *zap.Logger
@@ -12,7 +11,8 @@ func InitLogger(config Config) error {
 	if err != nil {
     return err
 	}
-	zapLogger = *zapLogger
+	zapLogger = zapLogger
+  return nil
 }
 
 func GetZapLogger() *zap.Logger {

@@ -19,20 +19,20 @@ func main() {
 	}
 	log.Printf("Initialized configuration: %v", config)
 
-	err := app.InitLogger(config)
+	err = app.InitLogger(config)
 	if err != nil {
 		log.Fatal(err.Error())
   }
-  appLogger := GetZapLogger()
+  appLogger := app.GetZapLogger()
 	defer appLogger.Sync()
 
-	err = infra.InitDatabase(config.DatabaseUrl, &appLogger)
+	err = infra.InitDatabase(config.DatabaseUrl, appLogger)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	e := echo.New()
-	e.Use(echozap.ZapLogger(&appLogger))
+	e.Use(echozap.ZapLogger(appLogger))
 	e.Use(middleware.Recover())
 
 	healthz := handler.HealthzHandler{}
