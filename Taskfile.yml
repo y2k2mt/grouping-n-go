@@ -1,0 +1,14 @@
+version: '3'
+
+tasks:
+  build:
+    cmds:
+      - go build -v cmd/main.go
+    sources:
+      - ./*.go
+  dev:
+    cmds:
+      - go run cmd/main.go
+  fmt:
+    cmds:
+      - go fmt ./...
