@@ -36,7 +36,7 @@ func main() {
 	e.Use(middleware.Recover())
 
 	healthz := handler.HealthzHandler{}
-	group := handler.GroupHandler{GroupRepository: infra.GroupRepository{}}
+	group := handler.GroupHandler{GroupRepository: infra.GroupRepository{DB: infra.GetDatabase()}, Log: appLogger}
 
 	e.GET("/healthz", healthz.Healthz)
 	e.GET("/group", group.GetGroup)

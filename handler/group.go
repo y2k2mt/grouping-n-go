@@ -6,11 +6,13 @@ import (
 	"github.com/y2k2mt/grouping-n-go/errors"
 	"github.com/y2k2mt/grouping-n-go/infra"
 	"github.com/y2k2mt/grouping-n-go/model"
+	"go.uber.org/zap"
 	"net/http"
 )
 
 type GroupHandler struct {
 	GroupRepository infra.GroupRepository
+	Log             *zap.Logger
 }
 
 func (g *GroupHandler) GetGroup(c echo.Context) error {
@@ -19,6 +21,9 @@ func (g *GroupHandler) GetGroup(c echo.Context) error {
 		if e.Is(err, errors.NoGroup) {
 			return c.NoContent(http.StatusNotFound)
 		} else {
+			if g.Log != nil {
+				g.Log.Warn("failed to fetch group %v", zap.Error(err))
+			}
 			return c.NoContent(http.StatusInternalServerError)
 		}
 	}
