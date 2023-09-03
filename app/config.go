@@ -1,30 +1,30 @@
 package app
 
 import (
-  "fmt"
+	"fmt"
 	"github.com/kelseyhightower/envconfig"
 )
 
 type RunEnv int
 
 const (
-  Development RunEnv = iota
-  Staging
-  Production
+	Development RunEnv = iota
+	Staging
+	Production
 )
 
 func (m *RunEnv) Decode(value string) error {
-    switch {
-    case value == "Production":
-        *m = Production
-    case value == "Staging":
-        *m = Production
-    case value == "Development":
-        *m = Development
-    default:
-        return fmt.Errorf("'%s' is an unrecognized env", value)
-    }
-    return nil
+	switch {
+	case value == "Production":
+		*m = Production
+	case value == "Staging":
+		*m = Production
+	case value == "Development":
+		*m = Development
+	default:
+		return fmt.Errorf("'%s' is an unrecognized env", value)
+	}
+	return nil
 }
 
 type AppConfig struct {
@@ -37,11 +37,11 @@ var c AppConfig
 func InitAppConfig() error {
 	err := envconfig.Process("app", &c)
 	if err != nil {
-    return err
-  }
-  return nil
+		return err
+	}
+	return nil
 }
 
 func GetAppConfig() AppConfig {
-  return c
+	return c
 }

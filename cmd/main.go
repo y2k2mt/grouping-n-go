@@ -17,14 +17,14 @@ func main() {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-  config := app.GetAppConfig()
+	config := app.GetAppConfig()
 	log.Printf("Initialized configuration: %v", config)
 
 	err = app.InitLogger(config)
 	if err != nil {
 		log.Fatal(err.Error())
-  }
-  appLogger := app.GetZapLogger()
+	}
+	appLogger := app.GetZapLogger()
 	defer appLogger.Sync()
 
 	err = infra.InitDatabase(config.DatabaseUrl, appLogger)

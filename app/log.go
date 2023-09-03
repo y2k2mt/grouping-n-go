@@ -9,12 +9,12 @@ var zapLogger *zap.Logger
 func InitLogger(config AppConfig) error {
 	zapLogger, err := zap.NewProduction()
 	if err != nil {
-    return err
+		return err
 	}
 	zapLogger = zapLogger
-  return nil
+	return nil
 }
 
 func GetZapLogger() *zap.Logger {
-  return zapLogger
+	return zapLogger
 }
