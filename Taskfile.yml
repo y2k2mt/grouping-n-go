@@ -8,7 +8,7 @@ tasks:
       - ./*.go
   dev:
     cmds:
-      - go run cmd/main.go
+      - air
   fmt:
     cmds:
       - go fmt ./...
