@@ -37,7 +37,8 @@ func main() {
 	handlers := app.NewHandlers()
 
 	e.GET("/healthz", handlers.HealthzHandler.Healthz)
-	e.GET("/group/:id", handlers.GroupHandler.GetGroup)
+	e.POST("/grouping", handlers.GroupHandler.CreateGroup)
+	e.GET("/grouping/:id", handlers.GroupHandler.GetGroup)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
