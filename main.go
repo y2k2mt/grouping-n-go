@@ -5,7 +5,6 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/y2k2mt/grouping-n-go/app"
-	"github.com/y2k2mt/grouping-n-go/handler"
 	"github.com/y2k2mt/grouping-n-go/infra"
 	"log"
 )
@@ -35,11 +34,10 @@ func main() {
 	e.Use(echozap.ZapLogger(appLogger))
 	e.Use(middleware.Recover())
 
-	healthz := handler.HealthzHandler{}
-	group := handler.GroupHandler{GroupRepository: infra.GroupRepository{DB: infra.GetDatabase()}, Log: appLogger}
+	handlers := app.NewHandlers()
 
-	e.GET("/healthz", healthz.Healthz)
-	e.GET("/group/:id", group.GetGroup)
+	e.GET("/healthz", handlers.HealthzHandler.Healthz)
+	e.GET("/group/:id", handlers.GroupHandler.GetGroup)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
