@@ -13,7 +13,7 @@ type Handlers struct {
 func NewHandlers() Handlers {
 
 	// Initialize all application instances.(Constructor injection)
-	// Functional Option Patter is too heavy...
+	// DI container or Functional Option Pattern are too heavy...
 	logger := GetAppLogger()
 	db := infra.GetDatabase()
 
