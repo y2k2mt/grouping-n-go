@@ -30,7 +30,7 @@ func (m *RunEnv) Decode(value string) error {
 
 type AppConfig struct {
 	Env         RunEnv `envconfig:"RUN_ENV" required:"true"`
-	DatabaseUrl string `envconfig:"DATABASE_URL" default:"host=localhost port=5432 user=postgres dbname=postgres sslmode=disable"`
+	DatabaseUrl string `envconfig:"DATABASE_URL" default:"postgres://postgres:postgres@127.0.0.1:/postgres?sslmode=disable"`
 }
 
 var c AppConfig
