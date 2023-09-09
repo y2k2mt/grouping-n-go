@@ -12,3 +12,6 @@ tasks:
   fmt:
     cmds:
       - go fmt ./...
+  migrate:
+    cmds:
+      - migrate  -database postgresql://postgres:postgres@127.0.0.1:/postgres?sslmode=disable -path db/migrations/ up
