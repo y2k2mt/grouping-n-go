@@ -17,10 +17,10 @@ func NewHandlers() Handlers {
 	logger := GetAppLogger()
 	db := infra.GetDatabase()
 
-	groupRepository := infra.GroupRepository{DB: db}
+	groupingDatasource := infra.GroupingDatasource{DB: db}
 
 	healthzHandler := handler.HealthzHandler{}
-	groupHandler := handler.GroupHandler{GroupRepository: groupRepository, Log: logger}
+	groupHandler := handler.GroupHandler{Groups: groupingDatasource, Log: logger}
 
 	return Handlers{
 		GroupHandler:   groupHandler,

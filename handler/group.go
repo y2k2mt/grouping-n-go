@@ -12,8 +12,8 @@ import (
 )
 
 type GroupHandler struct {
-	GroupRepository infra.GroupRepository
-	Log             *zap.Logger
+	Groups infra.GroupingDatasource
+	Log    *zap.Logger
 }
 
 func (g *GroupHandler) CreateGroup(c echo.Context) error {
@@ -41,7 +41,7 @@ func (g *GroupHandler) CreateGroup(c echo.Context) error {
 }
 
 func (g *GroupHandler) GetGroup(c echo.Context) error {
-	group, err := model.GetGroup(model.GroupId{Id: c.Param("id")}, g.GroupRepository)
+	group, err := model.GetGroup(model.GroupId{Id: c.Param("id")}, g.Groups)
 	if err != nil {
 		if e.Is(err, errors.NoGroup) {
 			return c.NoContent(http.StatusNotFound)

@@ -8,19 +8,19 @@ import (
 	"github.com/y2k2mt/grouping-n-go/errors"
 )
 
-type Group struct {
-	id    string
-	value string
+type PersistedGroup struct {
+	Id    string
+	Value string
 }
 
-type GroupRepository struct {
+type GroupingDatasource struct {
 	DB *pgx.Pool
 }
 
-func (g *GroupRepository) GetGroup(id string) (*Group, error) {
+func (g *GroupingDatasource) GetGroup(id string) (*PersistedGroup, error) {
 	ctx := context.Background()
-	group := Group{}
-	err := g.DB.QueryRow(ctx, "SELECT id, value FROM groupings WHERE id = $1", id).Scan(&group.id, &group.value)
+	group := PersistedGroup{}
+	err := g.DB.QueryRow(ctx, "SELECT id, value FROM groupings WHERE id = $1", id).Scan(&group.Id, &group.Value)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, e.WithMessage(errors.NoGroup, id)

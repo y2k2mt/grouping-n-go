@@ -1,6 +1,7 @@
 package model
 
 import (
+	"encoding/json"
 	"fmt"
 	e "github.com/cockroachdb/errors"
 	"github.com/google/uuid"
@@ -13,10 +14,6 @@ import (
 
 type GroupId struct {
 	Id string
-}
-
-type GroupResult struct {
-	group *infra.Group
 }
 
 type Candidates struct {
@@ -33,12 +30,14 @@ type IdentifiedGroups struct {
 	Groups []Group `json:"groups"`
 }
 
-func GetGroup(id GroupId, repository infra.GroupRepository) (GroupResult, error) {
-	group, err := repository.GetGroup(id.Id)
+func GetGroup(id GroupId, datas infra.GroupingDatasource) (IdentifiedGroups, error) {
+	loaded, err := datas.GetGroup(id.Id)
 	if err != nil {
-		return GroupResult{}, err
+		return IdentifiedGroups{}, err
 	}
-	return GroupResult{group: group}, nil
+	var groups []Group
+	json.Unmarshal([]byte(loaded.Value), &groups)
+	return IdentifiedGroups{Id: loaded.Id, Groups: groups}, nil
 }
 
 func Grouping(candidates Candidates) (IdentifiedGroups, error) {
