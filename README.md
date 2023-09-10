@@ -13,7 +13,7 @@ A tiny API: Just shuffles the given names.
 1. Run `task dev` to start the app
 1. Request 
 ```
-curl localhost:8080/grouping -H 'Content-Type: application/json' -d '{"n": 2,"members": ["1","2","3","4","5","6","7","8"]}'
+curl localhost:1323/grouping -H 'Content-Type: application/json' -d '{"n": 2,"members": ["1","2","3","4","5","6","7","8"]}'
 ```
 5. And response
 ```
