@@ -24,16 +24,12 @@ type Candidates struct {
 }
 
 type Group struct {
-	Members []string
-}
-
-type Groups struct {
-	Groups []Group
+	Members []string `json:"members"`
 }
 
 type IdentifiedGroups struct {
-	Id     string
-	Groups Groups
+	Id     string  `json:"id"`
+	Groups []Group `json:"groups"`
 }
 
 func GetGroup(id GroupId, repository infra.GroupRepository) (GroupResult, error) {
@@ -54,11 +50,9 @@ func Grouping(candidates Candidates) (IdentifiedGroups, error) {
 	rand.Seed(time.Now().UnixNano())
 	rand.Shuffle(len(shuffled), func(i, j int) { shuffled[i], shuffled[j] = shuffled[j], shuffled[i] })
 	groupedMembers := lo.Chunk(shuffled, (len(candidates.Members)/candidates.N)+(len(candidates.Members)%candidates.N))
-	groups := Groups{
-		Groups: lo.Map(groupedMembers, func(x []string, index int) Group {
-			return Group{Members: x}
-		}),
-	}
+	groups := lo.Map(groupedMembers, func(x []string, index int) Group {
+		return Group{Members: x}
+	})
 	return IdentifiedGroups{
 		Id:     "FIXME",
 		Groups: groups,
