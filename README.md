@@ -21,26 +21,24 @@ curl localhost:1323/grouping -H 'Content-Type: application/json' -d '{"n": 2,"me
 < Content-Type: application/json
 < Content-Length: 126
 {
-  "group": {
-    "groups": [
-      {
-        "members": [
-          "8",
-          "7",
-          "3",
-          "2"
-        ]
-      },
-      {
-        "members": [
-          "5",
-          "1",
-          "4",
-          "6"
-        ]
-      }
-    ]
-  },
+  "groups": [
+    {
+      "members": [
+        "8",
+        "7",
+        "3",
+        "2"
+      ]
+    },
+    {
+      "members": [
+        "5",
+        "1",
+        "4",
+        "6"
+      ]
+    }
+  ],
   "id": "08d6277f-89aa-4da2-b2d6-627cd91fc749"
 }
 
