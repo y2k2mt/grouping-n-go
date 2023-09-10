@@ -3,6 +3,7 @@ package model
 import (
 	"fmt"
 	e "github.com/cockroachdb/errors"
+	"github.com/google/uuid"
 	"github.com/samber/lo"
 	"github.com/y2k2mt/grouping-n-go/errors"
 	"github.com/y2k2mt/grouping-n-go/infra"
@@ -53,8 +54,9 @@ func Grouping(candidates Candidates) (IdentifiedGroups, error) {
 	groups := lo.Map(groupedMembers, func(x []string, index int) Group {
 		return Group{Members: x}
 	})
+	uid, _ := uuid.NewUUID()
 	return IdentifiedGroups{
-		Id:     "FIXME",
+		Id:     uid.String(),
 		Groups: groups,
 	}, nil
 }
