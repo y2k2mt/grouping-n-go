@@ -8,7 +8,13 @@ tasks:
       - ./*.go
   dev:
     cmds:
-      - air
+      - cmd: kill -9 $(lsof -t -i:1323)
+        ignore_error: true
+      - go run main.go
+    env:
+      RUN_ENV: Development
+    sources:
+      - ./**/*
   fmt:
     cmds:
       - go fmt ./...
