@@ -21,7 +21,7 @@ func (g *GroupHandler) CreateGroup(c echo.Context) error {
 	if err := c.Bind(candidates); err != nil {
 		return c.String(http.StatusBadRequest, fmt.Sprintf("bad request %v", err))
 	}
-	identified, err := model.Grouping(*candidates)
+	identified, err := model.Grouping(*candidates, g.Groups)
 	if err != nil {
 		if e.Is(err, errors.InsufficientGroupingMember) {
 			return c.NoContent(http.StatusBadRequest)

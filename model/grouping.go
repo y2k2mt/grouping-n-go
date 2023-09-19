@@ -10,6 +10,7 @@ import (
 	"github.com/y2k2mt/grouping-n-go/infra"
 	"math/rand"
 	"time"
+	"unsafe"
 )
 
 type GroupId struct {
@@ -40,7 +41,7 @@ func GetGroup(id GroupId, datas infra.GroupingDatasource) (*IdentifiedGroups, er
 	return &IdentifiedGroups{Id: loaded.Id, Groups: groups}, nil
 }
 
-func Grouping(candidates Candidates) (*IdentifiedGroups, error) {
+func Grouping(candidates Candidates, datas infra.GroupingDatasource) (*IdentifiedGroups, error) {
 	if candidates.N < 2 {
 		return nil, e.WithMessage(errors.InsufficientGroupingNumber, fmt.Sprintf("%d", candidates.N))
 	} else if candidates.N > len(candidates.Members) {
@@ -54,6 +55,11 @@ func Grouping(candidates Candidates) (*IdentifiedGroups, error) {
 		return Group{Members: x}
 	})
 	uid, _ := uuid.NewUUID()
+	serialized, _ := json.Marshal(groups)
+	err := datas.AddGroup(uid.String(), *(*string)(unsafe.Pointer(&serialized)))
+	if err != nil {
+		return nil, e.Wrap(err, "Failed to add group")
+	}
 	return &IdentifiedGroups{
 		Id:     uid.String(),
 		Groups: groups,

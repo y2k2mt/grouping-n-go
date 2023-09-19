@@ -33,3 +33,19 @@ func (g *GroupingDatasource) GetGroup(id string) (*PersistedGroup, error) {
 	}
 	return &group, nil
 }
+
+func (g *GroupingDatasource) AddGroup(id string, value string) error {
+	ctx := context.Background()
+	_, err := g.DB.Exec(ctx, "INSERT INTO groupings (id,value) VALUES ($1,$2)", id, value)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return e.WithMessage(errors.NoGroup, id)
+			//FIXME: Not ErrNoRows?
+		} else if err.Error() == "no rows in result set" {
+			return e.WithMessage(errors.NoGroup, id)
+		} else {
+			return e.Wrap(err, "quering one group in database")
+		}
+	}
+	return nil
+}
