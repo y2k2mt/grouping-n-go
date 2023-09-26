@@ -2,11 +2,13 @@ version: '3'
 
 tasks:
   build:
+    desc: Build application binary.
     cmds:
       - go build -o tmp -v cmd/main.go
     sources:
       - ./*.go
   dev:
+    desc: Run application for development.
     cmds:
       - go run cmd/main.go
     env:
@@ -14,8 +16,10 @@ tasks:
     sources:
       - ./**/*
   fmt:
+    desc: Format all codes.
     cmds:
       - go fmt ./...
   migrate:
+    desc: Migrate local database.
     cmds:
       - migrate  -database postgresql://postgres:postgres@127.0.0.1:/postgres?sslmode=disable -path internal/db/migrations/ up
