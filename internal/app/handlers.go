@@ -1,8 +1,8 @@
 package app
 
 import (
-	"github.com/y2k2mt/grouping-n-go/internal/handler"
 	"github.com/y2k2mt/grouping-n-go/infra"
+	"github.com/y2k2mt/grouping-n-go/internal/handler"
 )
 
 type Handlers struct {
