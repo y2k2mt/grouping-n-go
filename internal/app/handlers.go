@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/y2k2mt/grouping-n-go/handler"
+	"github.com/y2k2mt/grouping-n-go/internal/handler"
 	"github.com/y2k2mt/grouping-n-go/infra"
 )
 

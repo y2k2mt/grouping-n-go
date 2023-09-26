@@ -5,7 +5,7 @@ import (
 	"github.com/brpaz/echozap"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/y2k2mt/grouping-n-go/app"
+	"github.com/y2k2mt/grouping-n-go/internal/app"
 	"github.com/y2k2mt/grouping-n-go/infra"
 	"log"
 	"net/http"
