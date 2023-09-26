@@ -10,7 +10,7 @@ tasks:
   dev:
     desc: Run application for development.
     cmds:
-      - go run cmd/main.go
+      - air
     env:
       RUN_ENV: Development
     sources:

@@ -6,6 +6,7 @@ A tiny API: Just shuffles the given names.
 
 1. Install go lang
 1. Install [task](https://taskfile.dev/installation/)
+1. Install [air](https://github.com/cosmtrek/air)
 1. Install [migrate](https://github.com/golang-migrate/migrate/tree/master/cmd/migrate)
 1. Run postgresql database server (e.g. `docker run --rm -d -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=trust postgres:14`)
 1. Run `task migrate` to migrate local database
