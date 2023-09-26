@@ -3,14 +3,14 @@ version: '3'
 tasks:
   build:
     cmds:
-      - go build -o tmp -v main.go
+      - go build -o tmp -v cmd/main.go
     sources:
       - ./*.go
   dev:
     cmds:
       - cmd: kill -9 $(lsof -t -i:1323)
         ignore_error: true
-      - go run main.go
+      - go run cmd/main.go
     env:
       RUN_ENV: Development
     sources:
